@@ -1,8 +1,12 @@
+import { div } from "framer-motion/client";
 import React from "react";
+import heroimage from "../assets/image.png";
 
 const Hero = () => {
     return (
-        <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-300 to-slate-100 px-4 pt-32">
+        
+        <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-300 to-slate-100 px-4 pt-">
+            
             <div className="w-full max-w-6xl backdrop-blur-xl bg-white/70 rounded-3xl p-10 shadow-xl grid md:grid-cols-2 gap-10 items-center">
 
                 {/* Left Content */}
@@ -41,7 +45,7 @@ const Hero = () => {
                 <div className="flex justify-center">
                     <div className="bg-white rounded-3xl p-4 shadow-lg">
                         <img
-                            src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1"
+                            src={heroimage}
                             alt="profile"
                             className="w-72 h-96 object-cover rounded-2xl"
                         />

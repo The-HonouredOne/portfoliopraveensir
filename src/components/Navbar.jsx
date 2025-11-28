@@ -1,12 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+
+  const navigate=useNavigate()
   return (
-    <div className="fixed top-6 left-1/2 -translate-x-1/2 w-[92%] z-50">
+    <div className="">
       <nav className="backdrop-blur-xl bg-white/70 shadow-lg rounded-2xl px-8 py-4 flex items-center justify-between">
         
-        {/* Logo */}
-        <div className="flex items-center gap-2 font-bold text-lg">
+        
+        <div className="flex items-center gap-2 font-bold text-lg cursor-pointer"
+        onClick={()=>navigate('/')}>
           <div className="w-9 h-9 bg-purple-600 text-white flex items-center justify-center rounded-full">
             P
           </div>
@@ -24,7 +28,9 @@ const Navbar = () => {
         </ul> */}
 
         {/* Button */}
-        <button className="bg-purple-600 hover:bg-purple-700 transition text-white px-6 py-2 rounded-lg font-semibold">
+        <button 
+        onClick={()=>navigate('/contact')}
+        className="bg-purple-600 hover:bg-purple-700 transition text-white px-6 py-2 rounded-lg font-semibold cursor-pointer">
           Contact
         </button>
       </nav>
