@@ -23,7 +23,7 @@ const adminKey = sessionStorage.getItem("adminKey");
 
   const fetchContacts = async () => {
     try {
-      const res = await fetch("http://localhost:8080/api/contacts", {
+      const res = await fetch("https://portfoliopra-server.onrender.com/api/contacts", {
         headers: {
           "x-admin-key": adminKey,
         },
@@ -45,7 +45,7 @@ const adminKey = sessionStorage.getItem("adminKey");
     if (!confirm("Delete this contact?")) return;
 
     try {
-      const res = await fetch(`http://localhost:8080/api/contact/${id}`, {
+      const res = await fetch(`https://portfoliopra-server.onrender.com/api/contact/${id}`, {
         method: "DELETE",
         headers: {
           "x-admin-key": adminKey,
@@ -66,7 +66,7 @@ const adminKey = sessionStorage.getItem("adminKey");
     if (!confirm("Delete ALL contacts?")) return;
 
     try {
-      const res = await fetch("http://localhost:8080/api/contacts", {
+      const res = await fetch("https://portfoliopra-server.onrender.com/api/contacts", {
         method: "DELETE",
         headers: {
           "x-admin-key": adminKey,

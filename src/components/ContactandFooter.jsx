@@ -1,7 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 
 const ContactAndFooter = () => {
+
+    const [formData, setFormData] = useState({
+      name: "",
+      email: "",
+      message: "",
+    });
+  
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState("");
+    const [error, setError] = useState("");
+  
+    const handleChange = (e) => {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setLoading(true);
+      setSuccess("");
+      setError("");
+  
+      try {
+        const res = await fetch("https://portfoliopra-server.onrender.com/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+  
+        const data = await res.json();
+  
+        if (!res.ok) throw new Error(data.message || "Something went wrong");
+  
+        setSuccess("✅ Your message has been sent successfully!");
+        setFormData({ name: "", email: "", message: "" });
+      } catch (err) {
+        setError(err.message || "❌ Failed to send message");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+
   return (
     <section className="bg-[#0b1220] pt-32">
 
@@ -51,22 +96,68 @@ const ContactAndFooter = () => {
           </div>
 
           {/* Right Form */}
-          <form className="space-y-6">
-            <input className="w-full border-b py-2 outline-none" placeholder="Name*" />
-            <input className="w-full border-b py-2 outline-none" placeholder="Email*" />
-            <input className="w-full border-b py-2 outline-none" placeholder="Location*" />
+          <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="text-sm font-medium text-gray-700">
+              Your Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              placeholder="Enter your name"
+              className="w-full mt-1 p-3 rounded-lg bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-indigo-400"
+            />
+          </div>
 
-            <div className="grid grid-cols-2 gap-6">
-              <input className="border-b py-2 outline-none" placeholder="Budget*" />
-              <input className="border-b py-2 outline-none" placeholder="Subject*" />
-            </div>
+          <div>
+            <label className="text-sm font-medium text-gray-700">
+              Your Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              placeholder="Enter your email"
+              className="w-full mt-1 p-3 rounded-lg bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-indigo-400"
+            />
+          </div>
 
-            <textarea className="w-full border-b py-2 outline-none" placeholder="Message*" rows="3" />
+          <div>
+            <label className="text-sm font-medium text-gray-700">
+              Your Message
+            </label>
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              required
+              rows="5"
+              placeholder="Tell me about your project..."
+              className="w-full mt-1 p-3 rounded-lg bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-indigo-400 resize-none"
+            />
+          </div>
 
-            <button className="inline-flex items-center gap-2 bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition">
-              Submit →
-            </button>
-          </form>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white transition py-3 rounded-xl text-lg font-semibold shadow-lg disabled:opacity-60"
+          >
+            {loading ? "Sending..." : "Send Message"}
+          </button>
+
+          {success && (
+            <p className="text-green-600 text-sm mt-2">{success}</p>
+          )}
+
+          {error && (
+            <p className="text-red-500 text-sm mt-2">{error}</p>
+          )}
+        </form>
         </div>
       </div>
 
