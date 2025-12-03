@@ -42,6 +42,20 @@ const experiences = [
     duration: "Nov 2022 - Dec 2023",
     description:
       "Visionary leader driving innovation at the forefront of college entrepreneurship."
+  },
+  {
+    title: "Incubatee ",
+    organization: "PIEDS : Pilani Innovation & Entrepreneurship Development Society, BITS Pilani",
+    duration: "Sep 2022 - Sep 2023",
+    description:
+      "Crafted by BITS Pilani, Pilani Campus in support with various government department initiatives, BITS alumni support & individual contributions, with an aim and object of fostering entrepreneurship spirit, facilitating innovation, nurturing technology-based startups."
+  },
+  {
+    title: "Campaign Consultant",
+    organization: "Google AdSense",
+    duration: "May 2023 - Jul 2023",
+    description:
+      "A problem isn't truly solved until it's solved for all. Googlers build products that help create opportunities for everyone, whether down the street or across the globe. Bring your insight, imagination and a healthy disregard for the impossible. Bring everything that makes you unique."
   }
 ];
 
