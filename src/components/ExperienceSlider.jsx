@@ -56,7 +56,28 @@ const experiences = [
     duration: "May 2023 - Jul 2023",
     description:
       "A problem isn't truly solved until it's solved for all. Googlers build products that help create opportunities for everyone, whether down the street or across the globe. Bring your insight, imagination and a healthy disregard for the impossible. Bring everything that makes you unique."
-  }
+  },
+  {
+    title: "Agency Partnership Executive",
+    organization: "Socialveins",
+    duration: "Nov 2022",
+    description:
+      "Socialveins.ai is an AI-powered platform for influencer marketing, connecting over 1.5 million social media creators with 300+ brands."
+  },
+  {
+    title: "Marketing Team Member",
+    organization: "Viral Fission",
+    duration: "Jun 2022 - Sep 2022",
+    description:
+      "Viral Fission, incorporated in 2019, is India’s first-ever youth network & community platform which digitises campuses and youth communities across India."
+  },
+  {
+    title: "Freelance",
+    organization: "SuprFam",
+    duration: "Jul 2021 - Jun 2022",
+    description:
+      "As an Influencer marketing aggregator platform, we empower micro agencies and Individuals with a SaaS tool, that will help brands execute and track the progress of the campaigns effortlessly."
+  },
 ];
 
 const ExperienceSlider = () => {
