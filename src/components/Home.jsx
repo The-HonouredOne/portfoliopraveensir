@@ -10,6 +10,7 @@ import Experience from './Experience'
 import ExperienceSlider from './ExperienceSlider'
 import FeaturedIn from './FeaturedIn'
 import SpeakerAt from './SpeakerAt'
+import ImageGallery from './ImageGallery'
 
 const Home = () => {
     return (
@@ -21,6 +22,7 @@ const Home = () => {
             <SpeakerAt/>
             {/* <Portfolio /> */}
             {/* <BlogAndServices /> */}
+            <ImageGallery />
             <HappyClient />
             <Testimonial />
             <ContactAndFooter />

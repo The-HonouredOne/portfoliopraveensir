@@ -7,7 +7,7 @@ const Hero = () => {
         
         <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-300 to-slate-100 px-4 pt-">
             
-            <div className="w-full max-w-6xl backdrop-blur-xl bg-white/70 rounded-3xl p-10 shadow-xl grid md:grid-cols-2 gap-10 items-center">
+            <div className="w-full max-w-6xl backdrop-blur-xl bg-white/70 rounded-3xl p-10 py-30 mb-10 shadow-xl grid md:grid-cols-2 gap-10 items-center">
 
                 {/* Left Content */}
                 <div>
@@ -20,9 +20,9 @@ const Hero = () => {
                         Serial entrepreneur passionate about restarting and rebuilding to unlock potential. Founder of WIZ4U Group and Chief Content Creator at Success Redefining, inspiring growth through impactful content.
                     </p>
 
-                    <button className="mt-6 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-xl font-semibold">
+                    {/* <button className="mt-6 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-xl font-semibold">
                         Say Hello!
-                    </button>
+                    </button> */}
 
                     {/* Stats */}
                     <div className="flex gap-8 mt-10">

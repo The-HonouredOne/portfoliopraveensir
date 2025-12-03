@@ -16,7 +16,8 @@ export default function AdminLogin() {
 
    sessionStorage.setItem("adminKey", key);
 
-    navigate("/admin/contacts");
+  navigate("/admin/dashboard");
+
   };
 
   return (

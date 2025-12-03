@@ -3,19 +3,19 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const testimonials = [
   {
-    name: "Esther Howard",
-    role: "Managing Director, ABC Company",
-    text: "Nulla efficitur nisl sit amet velit malesuada dapibus. Duis mollis felis turpis, nec semper odio convallis at.",
+    name: "Rakshit Satija",
+    role: "AI Product Manager, Spyne",
+    text: "It was a great time to record a podcast with Praveen for his YT channel and I must commend him and his team for their outstanding efforts. The Sukoon Show stands out for its insightful discussions and good-quality production. I wish Praveen and his team all the very best in their future endeavors and continued success with the podcast.",
   },
   {
-    name: "Brooklyn Simmons",
-    role: "CEO, XYZ Company",
-    text: "Curabitur imperdiet semper arcu, a finibus arcu suscipit in. Donec quis placerat nibh.",
+    name: "Manish Balani",
+    role: "LinkedIn Top Voice: Fintech",
+    text: "Great work done by Praveen while Coordinating for and Hosting the Podcast: The Sukoon Show. I wish him and his team all the best for the success of their podcast.",
   },
   {
-    name: "Ronald Richards",
-    role: "Founder, Startup Hub",
-    text: "Maecenas est purus, eleifend ac cursus sed, tincidunt ut sapien. Morbi ornare elit at libero suscipit porta.",
+    name: "Ramakant Soni",
+    role: "A passionate Teacher and lifelong teacher, Birla Institute of Technology and Science, Pilani",
+    text: "Praveen Saini demonstrates remarkable leadership qualities coupled with strong competencies in management, public speaking, and entrepreneurship. Throughout his college tenure, he adeptly orchestrated several impactful entrepreneurship initiatives. Praveen's talent for motivating audiences through compelling speeches, combined with his commitment to cultivating entrepreneurial environments, renders him an invaluable addition to any team or institution. I wholeheartedly endorse him.",
   },
 ];
 

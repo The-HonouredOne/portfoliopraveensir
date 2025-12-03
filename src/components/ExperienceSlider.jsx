@@ -6,15 +6,13 @@ const experiences = [
     title: "Chief Content Creator",
     organization: "SUCCESS REDEFINING",
     duration: "May 2024 - Present",
-    type: "Self Employ",
     description:
-      "What were you doing at 19?Preparing for exams? Scrolling social media?Himanshu Rajpurohit was pitching his startup Nexera.Health to millions on Shark Tank India — in front of sharks like Aman Gupta, Ritesh Agarwal, Kunal Bahl Vineeta Singh, and Namita Thapar."
+      "What were you doing at 19? Preparing for exams? Scrolling social media? Himanshu Rajpurohit was pitching his startup Nexera.Health to millions on Shark Tank India."
   },
   {
     title: "Founder",
     organization: "WIZ4U Groups",
     duration: "July 2022 - Present",
-    type: "Self Employ",
     description:
       "Selected among top teams nationwide. Built a real-time web solution under 36-hour coding challenge."
   },
@@ -22,27 +20,43 @@ const experiences = [
     title: "Founder & Host",
     organization: "SUKOON show",
     duration: "Jan 2024 - Dec 2024",
-    type: "Full Time",
     description:
-      "The SUKOON Show is the first-of-its-kind podcast in India that brings together entrepreneurs from all industries and business sizes. Our goal is to showcase the diversity and resilience of the Indian entrepreneurial spirit, and to provide a platform for business owners to share their experiences and insights."
+      "The SUKOON Show is the first-of-its-kind podcast in India that brings together entrepreneurs from all industries."
   },
   {
     title: "Vice ChairPerson",
     organization: "IEEE BKBIET SB",
     duration: "Sep 2023 - Jun 2024",
-    type: "WorkShop",
     description:
       "Learned user-centered design, wireframing, prototyping, and Figma workflows."
+  },
+  {
+    title: "Founder",
+    organization: "Carrer Catalyst Cell (CCC)",
+    duration: "Dec 2023 - Feb 2024",
+    description: "Education Administration Programs"
+  },
+  {
+    title: "President",
+    organization: "E-Cell BKBIET",
+    duration: "Nov 2022 - Dec 2023",
+    description:
+      "Visionary leader driving innovation at the forefront of college entrepreneurship."
   }
 ];
 
 const ExperienceSlider = () => {
   const sliderRef = useRef(null);
-  const [width, setWidth] = useState(0);
+  const cardRef = useRef(null);
+
+  const [cardWidth, setCardWidth] = useState(0);
   const [index, setIndex] = useState(0);
 
+  // ✅ Measure card width dynamically
   useEffect(() => {
-    setWidth(sliderRef.current.scrollWidth - sliderRef.current.offsetWidth);
+    if (cardRef.current) {
+      setCardWidth(cardRef.current.offsetWidth + 40); // 40 = gap-10
+    }
   }, []);
 
   // ✅ Auto-play
@@ -50,80 +64,89 @@ const ExperienceSlider = () => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % experiences.length);
     }, 4200);
+
     return () => clearInterval(interval);
   }, []);
 
+  // ✅ Scroll on index change
   useEffect(() => {
-    sliderRef.current.scrollTo({
-      left: index * 380,
-      behavior: "smooth"
-    });
-  }, [index]);
+    if (sliderRef.current) {
+      sliderRef.current.scrollTo({
+        left: index * cardWidth,
+        behavior: "smooth"
+      });
+    }
+  }, [index, cardWidth]);
+
+  // ✅ Mouse wheel → horizontal scroll
+  const handleWheel = (e) => {
+    if (sliderRef.current) {
+      e.preventDefault();
+      sliderRef.current.scrollLeft += e.deltaY;
+    }
+  };
+  
 
   return (
-    <section className="py-32 bg-gradient-to-b from-white to-gray-50 px-4 overflow-hidden">
+    <section className="py-16 sm:py-24 lg:py-32 bg-gradient-to-b from-white to-gray-50 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
           <span className="text-purple-600 font-semibold tracking-wider uppercase text-sm">
             Experience
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mt-3 mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-3 mb-4">
             My Professional Journey
           </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto">
-            Internships, competitions, programs and hands-on real-world learning.
+          <p className="text-sm sm:text-base text-gray-500 max-w-2xl mx-auto px-4">
+            Internships, competitions, programs and hands-on learning.
           </p>
         </div>
 
         {/* Slider */}
         <motion.div
           ref={sliderRef}
-          className="cursor-grab active:cursor-grabbing overflow-hidden"
+          onWheel={handleWheel}
+          className="cursor-grab active:cursor-grabbing overflow-x-auto scroll-smooth hide-scrollbar"
         >
           <motion.div
             drag="x"
-            dragConstraints={{ right: 0, left: -width }}
-            className="flex gap-10"
+            className="flex gap-4 sm:gap-6 lg:gap-10 w-max"
           >
             {experiences.map((item, i) => (
               <motion.div
+                ref={i === 0 ? cardRef : null}
                 key={i}
                 whileHover={{ y: -12 }}
                 transition={{ type: "spring", stiffness: 120 }}
                 className="
-                  min-w-[360px]
+                  min-w-[280px] sm:min-w-[300px] lg:min-w-[320px]
+                  w-[280px] sm:w-[300px] lg:w-[320px]
                   bg-white/80 backdrop-blur-xl
                   border border-gray-200
-                  rounded-3xl
+                  rounded-2xl sm:rounded-3xl
                   shadow-[0_20px_50px_rgba(0,0,0,0.08)]
-                  p-8
+                  p-4 sm:p-6 lg:p-8
                   relative
                   overflow-hidden
+                  flex-shrink-0
                 "
               >
-                {/* Glow */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-200/10 to-pink-200/10 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-200/10 to-pink-200/10" />
 
-                {/* Type Tag */}
-                <span className="inline-block mb-4 px-4 py-1 text-xs rounded-full bg-purple-100 text-purple-700 font-semibold tracking-wide">
-                  {item.type}
-                </span>
-
-                <h3 className="text-xl font-bold mb-1">
+                <h3 className="text-lg sm:text-xl font-bold mb-1">
                   {item.title}
                 </h3>
 
-                <p className="text-sm text-gray-500 mb-4">
+                <p className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">
                   {item.organization} • {item.duration}
                 </p>
 
-                <p className="text-gray-600 leading-relaxed text-sm">
+                <p className="text-gray-600 leading-relaxed text-xs sm:text-sm">
                   {item.description}
                 </p>
 
-                {/* Bottom Accent Line */}
                 <div className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-purple-500 to-pink-500" />
               </motion.div>
             ))}
@@ -131,7 +154,7 @@ const ExperienceSlider = () => {
         </motion.div>
 
         {/* Navigation Dots */}
-        <div className="flex justify-center gap-3 mt-12">
+        {/* <div className="flex justify-center gap-3 mt-12">
           {experiences.map((_, i) => (
             <button
               key={i}
@@ -143,7 +166,7 @@ const ExperienceSlider = () => {
               }`}
             />
           ))}
-        </div>
+        </div> */}
 
       </div>
     </section>

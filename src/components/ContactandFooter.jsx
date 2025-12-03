@@ -83,7 +83,7 @@ const ContactAndFooter = () => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
+              {/* <div className="flex items-center gap-4">
                 <span className="bg-purple-100 text-purple-600 p-3 rounded-lg">
                   <FaPhoneAlt />
                 </span>
@@ -91,7 +91,7 @@ const ContactAndFooter = () => {
                   <p className="font-medium">Call me now:</p>
                   <p className="text-gray-500">00-1234-0000</p>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 
