@@ -1,50 +1,31 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
-import { FaMicrophoneAlt, FaMapMarkerAlt } from "react-icons/fa";
-
-const speakerData = [
-  {
-    title: "Web Development Seminar",
-    place: "JECRC University",
-    location: "Jaipur, India",
-    image: "https://imgs.search.brave.com/pr9ZJFMn5pWkfbKbjtceXnU8OUcG1Xn-OPpO3pw54Ek/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA4LzkyLzcxLzE0/LzM2MF9GXzg5Mjcx/MTQwM19kZmhKWXln/UUlBdG5XOWJHSHdp/a0xMZ3N6VkwyVDVW/Ui5qcGc",
-    year: "2024",
-  },
-  {
-    title: "Digital Marketing Workshop",
-    place: "Startup India Program",
-    location: "Delhi, India",
-    image: "https://imgs.search.brave.com/pr9ZJFMn5pWkfbKbjtceXnU8OUcG1Xn-OPpO3pw54Ek/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA4LzkyLzcxLzE0/LzM2MF9GXzg5Mjcx/MTQwM19kZmhKWXln/UUlBdG5XOWJHSHdp/a0xMZ3N6VkwyVDVW/Ui5qcGc",
-    year: "2023",
-  },
-  {
-    title: "UI/UX Guest Lecture",
-    place: "Poornima College",
-    location: "Jaipur, India",
-    image: "https://imgs.search.brave.com/pr9ZJFMn5pWkfbKbjtceXnU8OUcG1Xn-OPpO3pw54Ek/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA4LzkyLzcxLzE0/LzM2MF9GXzg5Mjcx/MTQwM19kZmhKWXln/UUlBdG5XOWJHSHdp/a0xMZ3N6VkwyVDVW/Ui5qcGc",
-    year: "2023",
-  },
-  // {
-  //   title: "National Tech Conference",
-  //   place: "Tech Expo",
-  //   location: "Bangalore, India",
-  //   image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
-  //   year: "2022",
-  // },
-  // {
-  //   title: "Startup Mentorship Session",
-  //   place: "Innovation Hub",
-  //   location: "Mumbai, India",
-  //   image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df",
-  //   year: "2022",
-  // },
-];
+import { FaMicrophoneAlt, FaExternalLinkAlt } from "react-icons/fa";
 
 const SpeakerAt = () => {
   const controls = useAnimation();
   const sliderRef = useRef(null);
   const trackRef = useRef(null);
   const [width, setWidth] = useState(0);
+  const [speakerData, setSpeakerData] = useState([]);
+
+  const API_URL = "http://localhost:8080";
+
+  // Fetch speaker data from API
+  useEffect(() => {
+    const fetchSpeaker = async () => {
+      try {
+        const res = await fetch(`${API_URL}/api/speaker`);
+        const data = await res.json();
+        if (data.success) {
+          setSpeakerData(data.speaker);
+        }
+      } catch (err) {
+        console.error("Failed to fetch speaker:", err);
+      }
+    };
+    fetchSpeaker();
+  }, []);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -101,7 +82,7 @@ const SpeakerAt = () => {
             dragElastic={0.05}
             style={{ backfaceVisibility: "hidden" }}
           >
-            {[...speakerData, ...speakerData].map((item, index) => (
+            {speakerData.map((item, index) => (
               <motion.div
                 key={index}
                 whileHover={{ y: -8 }}
@@ -115,14 +96,14 @@ const SpeakerAt = () => {
               
                 <div className="h-52 relative overflow-hidden">
                   <img
-                    src={item.image}
-                    alt={item.title}
+                    src={item.logo}
+                    alt={item.name}
                     loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-110 duration-700"
+                    className="w-full h-full object-contain bg-white p-4 group-hover:scale-110 duration-700"
+                    onError={(e) => {
+                      e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23f3f4f6'/%3E%3Ctext x='100' y='100' text-anchor='middle' dy='.3em' fill='%236b7280'%3ENo Logo%3C/text%3E%3C/svg%3E";
+                    }}
                   />
-                  <div className="absolute top-4 left-4 bg-purple-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                    {item.year}
-                  </div>
                 </div>
 
                 
@@ -132,24 +113,27 @@ const SpeakerAt = () => {
                   </div>
 
                   <h3 className="font-bold text-lg mb-2">
-                    {item.title}
+                    {item.name}
                   </h3>
 
-                  <p className="text-sm text-gray-600 mb-2">
-                    {item.place}
+                  <p className="text-sm text-gray-600 mb-5">
+                    Speaker Event/Organization
                   </p>
 
-                  <div className="flex items-center gap-2 text-xs text-gray-500 mb-5">
-                    <FaMapMarkerAlt /> {item.location}
-                  </div>
-
-                  <button className="
-                    text-sm font-semibold text-purple-600
-                    flex items-center gap-2
-                    hover:gap-3 transition-all
-                  ">
-                    View Highlights →
-                  </button>
+                  {item.url && (
+                    <a 
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="
+                        text-sm font-semibold text-purple-600
+                        flex items-center gap-2
+                        hover:gap-3 transition-all
+                      "
+                    >
+                      Visit Website <FaExternalLinkAlt />
+                    </a>
+                  )}
                 </div>
               </motion.div>
             ))}

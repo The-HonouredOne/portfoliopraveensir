@@ -6,7 +6,7 @@ export default function AdminContacts({ adminKey }) {
 
   const fetchContacts = async () => {
     try {
-      const res = await fetch("https://portfoliopra-server.onrender.com/api/contacts", {
+      const res = await fetch("http://localhost:8080/api/contacts", {
         headers: { "x-admin-key": adminKey },
       });
       const data = await res.json();
@@ -25,7 +25,7 @@ export default function AdminContacts({ adminKey }) {
   const deleteOne = async (id) => {
     if (!confirm("Delete this contact?")) return;
 
-    await fetch(`https://portfoliopra-server.onrender.com/api/contact/${id}`, {
+    await fetch(`http://localhost:8080/api/contact/${id}`, {
       method: "DELETE",
       headers: { "x-admin-key": adminKey },
     });
@@ -36,7 +36,7 @@ export default function AdminContacts({ adminKey }) {
   const deleteAll = async () => {
     if (!confirm("Delete ALL contacts?")) return;
 
-    await fetch("https://portfoliopra-server.onrender.com/api/contacts", {
+    await fetch("http://localhost:8080/api/contacts", {
       method: "DELETE",
       headers: { "x-admin-key": adminKey },
     });

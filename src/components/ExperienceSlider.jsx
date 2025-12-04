@@ -1,91 +1,40 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-const experiences = [
-  {
-    title: "Chief Content Creator",
-    organization: "SUCCESS REDEFINING",
-    duration: "May 2024 - Present",
-    description:
-      "What were you doing at 19? Preparing for exams? Scrolling social media? Himanshu Rajpurohit was pitching his startup Nexera.Health to millions on Shark Tank India."
-  },
-  {
-    title: "Founder",
-    organization: "WIZ4U Groups",
-    duration: "July 2022 - Present",
-    description:
-      "Selected among top teams nationwide. Built a real-time web solution under 36-hour coding challenge."
-  },
-  {
-    title: "Founder & Host",
-    organization: "SUKOON show",
-    duration: "Jan 2024 - Dec 2024",
-    description:
-      "The SUKOON Show is the first-of-its-kind podcast in India that brings together entrepreneurs from all industries."
-  },
-  {
-    title: "Vice ChairPerson",
-    organization: "IEEE BKBIET SB",
-    duration: "Sep 2023 - Jun 2024",
-    description:
-      "Learned user-centered design, wireframing, prototyping, and Figma workflows."
-  },
-  {
-    title: "Founder",
-    organization: "Carrer Catalyst Cell (CCC)",
-    duration: "Dec 2023 - Feb 2024",
-    description: "Education Administration Programs"
-  },
-  {
-    title: "President",
-    organization: "E-Cell BKBIET",
-    duration: "Nov 2022 - Dec 2023",
-    description:
-      "Visionary leader driving innovation at the forefront of college entrepreneurship."
-  },
-  {
-    title: "Incubatee ",
-    organization: "PIEDS : Pilani Innovation & Entrepreneurship Development Society, BITS Pilani",
-    duration: "Sep 2022 - Sep 2023",
-    description:
-      "Crafted by BITS Pilani, Pilani Campus in support with various government department initiatives, BITS alumni support & individual contributions, with an aim and object of fostering entrepreneurship spirit, facilitating innovation, nurturing technology-based startups."
-  },
-  {
-    title: "Campaign Consultant",
-    organization: "Google AdSense",
-    duration: "May 2023 - Jul 2023",
-    description:
-      "A problem isn't truly solved until it's solved for all. Googlers build products that help create opportunities for everyone, whether down the street or across the globe. Bring your insight, imagination and a healthy disregard for the impossible. Bring everything that makes you unique."
-  },
-  {
-    title: "Agency Partnership Executive",
-    organization: "Socialveins",
-    duration: "Nov 2022",
-    description:
-      "Socialveins.ai is an AI-powered platform for influencer marketing, connecting over 1.5 million social media creators with 300+ brands."
-  },
-  {
-    title: "Marketing Team Member",
-    organization: "Viral Fission",
-    duration: "Jun 2022 - Sep 2022",
-    description:
-      "Viral Fission, incorporated in 2019, is India’s first-ever youth network & community platform which digitises campuses and youth communities across India."
-  },
-  {
-    title: "Freelance",
-    organization: "SuprFam",
-    duration: "Jul 2021 - Jun 2022",
-    description:
-      "As an Influencer marketing aggregator platform, we empower micro agencies and Individuals with a SaaS tool, that will help brands execute and track the progress of the campaigns effortlessly."
-  },
-];
-
 const ExperienceSlider = () => {
   const sliderRef = useRef(null);
   const cardRef = useRef(null);
 
+  const [experiences, setExperiences] = useState([]);
   const [cardWidth, setCardWidth] = useState(0);
   const [index, setIndex] = useState(0);
+
+  const API_URL = "http://localhost:8080";
+
+  // Fetch experiences from API
+  useEffect(() => {
+    const fetchExperiences = async () => {
+      try {
+        console.log('Fetching from:', `${API_URL}/api/experiences`);
+        const res = await fetch(`${API_URL}/api/experiences`);
+        console.log('Response status:', res.status);
+        
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        
+        const data = await res.json();
+        console.log('Response data:', data);
+        
+        if (data.success) {
+          setExperiences(data.experiences);
+        }
+      } catch (err) {
+        console.error("Failed to fetch experiences:", err);
+      }
+    };
+    fetchExperiences();
+  }, []);
 
   // ✅ Measure card width dynamically
   useEffect(() => {
@@ -101,7 +50,7 @@ const ExperienceSlider = () => {
     }, 4200);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [experiences.length]);
 
   // ✅ Scroll on index change
   useEffect(() => {
@@ -171,12 +120,22 @@ const ExperienceSlider = () => {
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-200/10 to-pink-200/10" />
 
                 <h3 className="text-lg sm:text-xl font-bold mb-1">
-                  {item.title}
+                  {item.position}
                 </h3>
 
                 <p className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">
-                  {item.organization} • {item.duration}
+                  {item.company} • {item.duration}
                 </p>
+
+                {item.technologies?.length > 0 && (
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    {item.technologies.slice(0, 3).map((tech, idx) => (
+                      <span key={idx} className="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
 
                 <p className="text-gray-600 leading-relaxed text-xs sm:text-sm">
                   {item.description}
@@ -187,21 +146,6 @@ const ExperienceSlider = () => {
             ))}
           </motion.div>
         </motion.div>
-
-        {/* Navigation Dots */}
-        {/* <div className="flex justify-center gap-3 mt-12">
-          {experiences.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setIndex(i)}
-              className={`w-3.5 h-3.5 rounded-full transition-all duration-300 ${
-                index === i
-                  ? "bg-purple-600 scale-125"
-                  : "bg-gray-300 hover:bg-purple-400"
-              }`}
-            />
-          ))}
-        </div> */}
 
       </div>
     </section>

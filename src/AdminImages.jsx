@@ -11,7 +11,7 @@ export default function AdminImagesTab({ adminKey }) {
   const fetchImages = async () => {
     try {
       setFetching(true);
-      const res = await fetch("https://portfoliopra-server.onrender.com/api/images");
+      const res = await fetch("http://localhost:8080/api/images");
       const data = await res.json();
       setImages(data.images || []);
     } catch (err) {
@@ -46,7 +46,7 @@ export default function AdminImagesTab({ adminKey }) {
       const formData = new FormData();
       formData.append("image", image);
 
-      const res = await fetch("https://portfoliopra-server.onrender.com/api/upload", {
+      const res = await fetch("http://localhost:8080/api/upload", {
         method: "POST",
         headers: { "x-admin-key": adminKey },
         body: formData,
@@ -72,7 +72,7 @@ export default function AdminImagesTab({ adminKey }) {
 
     try {
       await fetch(
-        `https://portfoliopra-server.onrender.com/api/image/${encodeURIComponent(publicId)}`,
+        `http://localhost:8080/api/image/${encodeURIComponent(publicId)}`,
         {
           method: "DELETE",
           headers: { "x-admin-key": adminKey },

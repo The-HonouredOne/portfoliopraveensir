@@ -1,39 +1,30 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { FaExternalLinkAlt } from "react-icons/fa";
-
-const featuredData = [
-  {
-    title: "Top Web Developer 2024",
-    source: "Tech Daily",
-    image: "https://imgs.search.brave.com/pr9ZJFMn5pWkfbKbjtceXnU8OUcG1Xn-OPpO3pw54Ek/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA4LzkyLzcxLzE0/LzM2MF9GXzg5Mjcx/MTQwM19kZmhKWXln/UUlBdG5XOWJHSHdp/a0xMZ3N6VkwyVDVW/Ui5qcGc",
-  },
-  {
-    title: "National Hackathon Winner",
-    source: "Startup India",
-    image: "https://imgs.search.brave.com/pr9ZJFMn5pWkfbKbjtceXnU8OUcG1Xn-OPpO3pw54Ek/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA4LzkyLzcxLzE0/LzM2MF9GXzg5Mjcx/MTQwM19kZmhKWXln/UUlBdG5XOWJHSHdp/a0xMZ3N6VkwyVDVW/Ui5qcGc",
-  },
-  {
-    title: "Featured Portfolio Design",
-    source: "Behance",
-    image: "https://imgs.search.brave.com/pr9ZJFMn5pWkfbKbjtceXnU8OUcG1Xn-OPpO3pw54Ek/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA4LzkyLzcxLzE0/LzM2MF9GXzg5Mjcx/MTQwM19kZmhKWXln/UUlBdG5XOWJHSHdp/a0xMZ3N6VkwyVDVW/Ui5qcGc",
-  },
-  // {
-  //   title: "Best UI Case Study",
-  //   source: "Dribbble",
-  //   image: "https://images.unsplash.com/photo-1507371341162-763b5e419408",
-  // },
-  // {
-  //   title: "Startup Recognition",
-  //   source: "Forbes India",
-  //   image: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b",
-  // },
-];
 
 const FeaturedIn = () => {
   const controls = useAnimation();
   const sliderRef = useRef(null);
   const speed = 20;
+  const [featuredData, setFeaturedData] = useState([]);
+
+  const API_URL = "http://localhost:8080";
+
+  // Fetch featured data from API
+  useEffect(() => {
+    const fetchFeatured = async () => {
+      try {
+        const res = await fetch(`${API_URL}/api/featured`);
+        const data = await res.json();
+        if (data.success) {
+          setFeaturedData(data.featured);
+        }
+      } catch (err) {
+        console.error("Failed to fetch featured:", err);
+      }
+    };
+    fetchFeatured();
+  }, []);
 
 
   useEffect(() => {
@@ -82,7 +73,7 @@ const FeaturedIn = () => {
             animate={controls}
             className="flex gap-8 w-max"
           >
-            {[...featuredData, ...featuredData].map((item, index) => (
+            {featuredData.map((item, index) => (
               <motion.div
                 key={index}
                 whileHover={{ y: -8 }}
@@ -97,9 +88,12 @@ const FeaturedIn = () => {
               
                 <div className="h-52 relative overflow-hidden">
                   <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-110 duration-700"
+                    src={item.logo}
+                    alt={item.name}
+                    className="w-full h-full object-contain bg-white p-4 group-hover:scale-110 duration-700"
+                    onError={(e) => {
+                      e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23f3f4f6'/%3E%3Ctext x='100' y='100' text-anchor='middle' dy='.3em' fill='%236b7280'%3ENo Logo%3C/text%3E%3C/svg%3E";
+                    }}
                   />
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
                     <FaExternalLinkAlt className="text-white text-xl" />
@@ -112,20 +106,27 @@ const FeaturedIn = () => {
                   </span>
 
                   <h3 className="font-bold text-lg mt-2 mb-1">
-                    {item.title}
+                    {item.name}
                   </h3>
 
                   <p className="text-sm text-gray-600 mb-4">
-                    Featured on <span className="font-semibold">{item.source}</span>
+                    Featured Company/Organization
                   </p>
 
-                  <button className="
-                    text-sm font-semibold text-purple-600
-                    flex items-center gap-2
-                    hover:gap-3 transition-all
-                  ">
-                    View Article <FaExternalLinkAlt />
-                  </button>
+                  {item.url && (
+                    <a 
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="
+                        text-sm font-semibold text-purple-600
+                        flex items-center gap-2
+                        hover:gap-3 transition-all
+                      "
+                    >
+                      Visit Website <FaExternalLinkAlt />
+                    </a>
+                  )}
                 </div>
               </motion.div>
             ))} 
