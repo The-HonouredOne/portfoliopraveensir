@@ -9,7 +9,7 @@ const SpeakerAt = () => {
   const [width, setWidth] = useState(0);
   const [speakerData, setSpeakerData] = useState([]);
 
-  const API_URL = "http://localhost:8080";
+  const API_URL = "https://portfoliopra-server.onrender.com";
 
   // Fetch speaker data from API
   useEffect(() => {

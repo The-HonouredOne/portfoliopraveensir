@@ -8,7 +8,7 @@ const FeaturedIn = () => {
   const speed = 20;
   const [featuredData, setFeaturedData] = useState([]);
 
-  const API_URL = "http://localhost:8080";
+  const API_URL = "https://portfoliopra-server.onrender.com";
 
   // Fetch featured data from API
   useEffect(() => {

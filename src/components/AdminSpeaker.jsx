@@ -10,7 +10,7 @@ export default function AdminSpeaker({ adminKey }) {
     url: ""
   });
 
-  const API_URL = "http://localhost:8080";
+  const API_URL = "https://portfoliopra-server.onrender.com";
 
   useEffect(() => {
     fetchSpeaker();
