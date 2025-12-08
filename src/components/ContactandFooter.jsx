@@ -166,9 +166,9 @@ const ContactAndFooter = () => {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center px-4 py-6 gap-4">
           <div className="flex items-center gap-2 font-semibold text-white">
             <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
-              B
+              P
             </div>
-            Brooklyn
+            Praveen
           </div>
 
           <ul className="flex gap-6 text-xs">
