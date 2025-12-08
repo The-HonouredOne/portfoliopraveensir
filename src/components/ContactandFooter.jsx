@@ -172,12 +172,12 @@ const ContactAndFooter = () => {
           </div>
 
           <ul className="flex gap-6 text-xs">
-            <li>Home</li>
-            <li>About</li>
-            <li>Services</li>
-            <li>Process</li>
-            <li>Portfolio</li>
-            <li>Blog</li>
+            {/* <li>Home</li> */}
+            {/* <li>About</li> */}
+            {/* <li>Services</li> */}
+            {/* <li>Process</li> */}
+            {/* <li>Portfolio</li> */}
+            {/* <li>Blog</li> */}
             <li>Contact</li>
           </ul>
 
