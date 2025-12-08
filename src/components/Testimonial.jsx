@@ -32,7 +32,7 @@ const Testimonial = () => {
   }, []);
 
   return (
-    <section className="py-32 px-4 bg-gradient-to-b from-white to-gray-50">
+    <section className="py-16 sm:py-24 lg:py-32 px-4 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-4xl mx-auto text-center">
 
         {/* Header */}
@@ -41,15 +41,15 @@ const Testimonial = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="mb-10 sm:mb-14 lg:mb-16"
         >
           <span className="text-purple-600 font-semibold tracking-wider uppercase text-sm">
             Testimonials
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mt-3">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3">
             What People Say
           </h2>
-          <p className="text-gray-500 mt-4 max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-gray-500 mt-3 sm:mt-4 max-w-xl mx-auto">
             Real stories from real people who trusted our work.
           </p>
         </motion.div>
@@ -65,20 +65,20 @@ const Testimonial = () => {
               transition={{ duration: 0.5 }}
               className="
                 bg-white/80 backdrop-blur-xl
-                border rounded-3xl shadow-xl
-                p-10 md:p-14
+                border rounded-2xl sm:rounded-3xl shadow-xl
+                p-6 sm:p-10 md:p-14
                 max-w-3xl mx-auto
               "
             >
-              <div className="text-6xl text-purple-200 mb-6">“</div>
+              <div className="text-4xl sm:text-6xl text-purple-200 mb-4 sm:mb-6">"</div>
 
-              <div className="flex justify-center mb-4">
-                <span className="text-yellow-500 text-2xl">
+              <div className="flex justify-center mb-3 sm:mb-4">
+                <span className="text-yellow-500 text-xl sm:text-2xl">
                   {"⭐".repeat(testimonials[index]?.rating || 5)}
                 </span>
               </div>
 
-              <p className="text-gray-700 text-lg leading-relaxed mb-8">
+              <p className="text-gray-700 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8">
                 {testimonials[index]?.review}
               </p>
 
@@ -87,13 +87,13 @@ const Testimonial = () => {
                   <img 
                     src={testimonials[index].avatar} 
                     alt={testimonials[index].name}
-                    className="w-16 h-16 rounded-full object-cover mb-2"
+                    className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover mb-2"
                     onError={(e) => {
                       e.target.style.display = 'none';
                     }}
                   />
                 )}
-                <h4 className="font-bold text-lg">
+                <h4 className="font-bold text-base sm:text-lg">
                   {testimonials[index]?.name}
                 </h4>
                 <p className="text-sm text-purple-600">
@@ -108,7 +108,7 @@ const Testimonial = () => {
         </div>
 
         {/* Dots */}
-        <div className="flex justify-center gap-3 mt-10">
+        <div className="flex justify-center gap-2 sm:gap-3 mt-8 sm:mt-10">
           {testimonials.map((_, i) => (
             <button
               key={i}

@@ -16,7 +16,7 @@ const brands = [
 
 const HappyClient = () => {
   return (
-    <section className="py-28 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+    <section className="py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
 
         {/* Header */}
@@ -25,12 +25,12 @@ const HappyClient = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-14 lg:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
             Trusted by Happy Clients
           </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-gray-500 max-w-2xl mx-auto px-4">
             Brands, startups, and creators who believed in our vision and
             partnered with us to build something impactful.
           </p>
@@ -39,7 +39,7 @@ const HappyClient = () => {
         {/* Infinite Slider */}
         <div className="relative overflow-hidden">
           <motion.div
-            className="flex gap-16 w-max"
+            className="flex gap-8 sm:gap-12 lg:gap-16 w-max"
             animate={{ x: ["0%", "-50%"] }}
             transition={{
               duration: 25,
@@ -51,12 +51,12 @@ const HappyClient = () => {
               <div
                 key={i}
                 className="
-                  min-w-[160px] h-20 
+                  min-w-[120px] sm:min-w-[140px] lg:min-w-[160px] h-16 sm:h-18 lg:h-20 
                   flex items-center justify-center
                   bg-white border rounded-2xl
                   shadow-sm hover:shadow-md
                   transition-all duration-300
-                  text-gray-500 font-semibold
+                  text-gray-500 text-sm sm:text-base font-semibold
                   hover:text-purple-600
                   hover:scale-105
                   cursor-pointer

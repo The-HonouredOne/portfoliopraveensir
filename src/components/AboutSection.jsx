@@ -2,10 +2,10 @@ import React from "react";
 
 const AboutSection = () => {
   return (
-    <section className="bg-[#f7f7fb] py-24 px-4">
+    <section className="bg-[#f7f7fb] py-12 sm:py-16 lg:py-24 px-4">
       <div className="max-w-6xl mx-auto">
 
-        <div className="bg-white rounded-3xl shadow-xl p-6 flex justify-center items-center">
+        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-6 flex justify-center items-center">
           
           <div className="w-full aspect-video rounded-2xl overflow-hidden">
             <iframe

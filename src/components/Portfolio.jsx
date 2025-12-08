@@ -13,7 +13,7 @@ const projects = [
 
 const Portfolio = () => {
   return (
-    <section className="py-28 px-4 bg-white">
+    <section className="py-12 sm:py-20 lg:py-28 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
 
         {/* ===== HEADING ===== */}
@@ -22,19 +22,19 @@ const Portfolio = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-14"
+          className="text-center mb-8 sm:mb-12 lg:mb-14"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
             Portfolio
           </h2>
-          <p className="text-gray-500 max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-gray-500 max-w-xl mx-auto px-4">
             There are many variations of passages of Lorem Ipsum available,
             but the majority have suffered alteration.
           </p>
         </motion.div>
 
         {/* ===== GRID ===== */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
 
           {projects.map((item, index) => (
             <motion.div
@@ -46,7 +46,7 @@ const Portfolio = () => {
               className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition overflow-hidden group border border-gray-100"
             >
               {/* Image */}
-              <div className="h-56 overflow-hidden">
+              <div className="h-48 sm:h-56 overflow-hidden">
                 <img
                   src={item.image}
                   alt="project"
@@ -55,12 +55,12 @@ const Portfolio = () => {
               </div>
 
               {/* Content */}
-              <div className="p-7">
+              <div className="p-5 sm:p-6 lg:p-7">
                 <span className="text-xs tracking-wide uppercase text-purple-600 font-semibold">
                   UI UX Design
                 </span>
 
-                <h3 className="font-bold text-lg mt-2 mb-3">
+                <h3 className="font-bold text-base sm:text-lg mt-2 mb-3">
                   {item.title}
                 </h3>
 
@@ -85,9 +85,9 @@ const Portfolio = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="flex justify-center mt-16"
+          className="flex justify-center mt-10 sm:mt-14 lg:mt-16"
         >
-          <button className="bg-purple-600 hover:bg-purple-700 transition text-white px-10 py-3 rounded-lg font-semibold shadow-md hover:shadow-lg">
+          <button className="bg-purple-600 hover:bg-purple-700 transition text-white px-8 sm:px-10 py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold shadow-md hover:shadow-lg">
             More Project
           </button>
         </motion.div>
@@ -95,7 +95,7 @@ const Portfolio = () => {
       </div>
 
       {/* ===== PREMIUM CTA SECTION ===== */}
-      <div className="mt-28 bg-gradient-to-r from-black via-gray-900 to-black py-20 px-6">
+      <div className="mt-16 sm:mt-20 lg:mt-28 bg-gradient-to-r from-black via-gray-900 to-black py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -103,20 +103,20 @@ const Portfolio = () => {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto text-center"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
             Do You Have Any Project Ideas?
           </h2>
 
-          <h3 className="text-purple-400 text-xl mb-4">
+          <h3 className="text-purple-400 text-lg sm:text-xl mb-3 sm:mb-4">
             Let’s Discuss Your Project
           </h3>
 
-          <p className="text-gray-400 text-sm max-w-2xl mx-auto mb-8">
+          <p className="text-gray-400 text-xs sm:text-sm max-w-2xl mx-auto mb-6 sm:mb-8 px-4">
             There are many variations of passages of Lorem Ipsum available,
             but the majority have suffered alteration.
           </p>
 
-          <button className="inline-flex items-center gap-3 bg-purple-600 hover:bg-purple-700 transition text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-purple-600/40">
+          <button className="inline-flex items-center gap-2 sm:gap-3 bg-purple-600 hover:bg-purple-700 transition text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-semibold shadow-lg hover:shadow-purple-600/40">
             Let’s Work Together
             <FaArrowRight />
           </button>

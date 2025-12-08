@@ -48,21 +48,21 @@ const ContactAndFooter = () => {
 
 
   return (
-    <section className="bg-[#0b1220] pt-32">
+    <section className="bg-[#0b1220] pt-16 sm:pt-24 lg:pt-32">
 
       {/* CONTACT CARD */}
       <div className="max-w-6xl mx-auto px-4">
-        <div className="bg-white rounded-3xl shadow-xl p-12 grid md:grid-cols-2 gap-14">
+        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-10 lg:p-12 grid md:grid-cols-2 gap-8 sm:gap-10 lg:gap-14">
 
           {/* Left */}
           <div>
-            <h2 className="text-2xl font-bold mb-4">Let's Discuss your Project</h2>
-            <p className="text-gray-500 mb-8">
+            <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Let's Discuss your Project</h2>
+            <p className="text-sm sm:text-base text-gray-500 mb-6 sm:mb-8">
               There are many variations of passages of Lorem Ipsum available,
               but the majority have suffered alteration.
             </p>
 
-            <div className="space-y-5 text-sm">
+            <div className="space-y-4 sm:space-y-5 text-sm">
               <div className="flex items-center gap-4">
                 <span className="bg-purple-100 text-purple-600 p-3 rounded-lg">
                   <FaMapMarkerAlt />
@@ -162,16 +162,16 @@ const ContactAndFooter = () => {
       </div>
 
       {/* FOOTER */}
-      <footer className="mt-20 border-t border-gray-700 text-gray-300 text-sm">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center px-4 py-6 gap-4">
-          <div className="flex items-center gap-2 font-semibold text-white">
-            <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
+      <footer className="mt-12 sm:mt-16 lg:mt-20 border-t border-gray-700 text-gray-300 text-sm">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center px-4 py-5 sm:py-6 gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 font-semibold text-white text-sm sm:text-base">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 bg-purple-600 rounded-full flex items-center justify-center text-sm">
               P
             </div>
             Praveen
           </div>
 
-          <ul className="flex gap-6 text-xs">
+          <ul className="flex gap-4 sm:gap-6 text-xs">
             {/* <li>Home</li> */}
             {/* <li>About</li> */}
             {/* <li>Services</li> */}
@@ -181,7 +181,7 @@ const ContactAndFooter = () => {
             <li>Contact</li>
           </ul>
 
-          <p className="text-xs">Copyright © 2022 Picto.</p>
+          <p className="text-xs text-center">Copyright © 2022 Picto.</p>
         </div>
       </footer>
 

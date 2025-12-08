@@ -6,12 +6,12 @@ const Navbar = () => {
   const navigate=useNavigate()
   return (
     <div className="">
-      <nav className="backdrop-blur-xl bg-white/70 shadow-lg rounded-2xl px-8 py-4 flex items-center justify-between">
+      <nav className="backdrop-blur-xl bg-white/70 shadow-lg rounded-xl sm:rounded-2xl px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex items-center justify-between">
         
         
-        <div className="flex items-center gap-2 font-bold text-lg cursor-pointer"
+        <div className="flex items-center gap-2 font-bold text-base sm:text-lg cursor-pointer"
         onClick={()=>navigate('/')}>
-          <div className="w-9 h-9 bg-purple-600 text-white flex items-center justify-center rounded-full">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 bg-purple-600 text-white flex items-center justify-center rounded-full text-sm sm:text-base">
             P
           </div>
           Praveen
@@ -30,7 +30,7 @@ const Navbar = () => {
         {/* Button */}
         <button 
         onClick={()=>navigate('/contact')}
-        className="bg-purple-600 hover:bg-purple-700 transition text-white px-6 py-2 rounded-lg font-semibold cursor-pointer">
+        className="bg-purple-600 hover:bg-purple-700 transition text-white px-4 sm:px-6 py-2 rounded-lg text-sm sm:text-base font-semibold cursor-pointer">
           Contact
         </button>
       </nav>
