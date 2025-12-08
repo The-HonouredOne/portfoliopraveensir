@@ -7,6 +7,7 @@ const SpeakerAt = () => {
   const sliderRef = useRef(null);
   const trackRef = useRef(null);
   const [width, setWidth] = useState(0);
+  const [dragConstraint, setDragConstraint] = useState(0);
   const [speakerData, setSpeakerData] = useState([]);
 
   const API_URL = "https://portfoliopra-server.onrender.com";
@@ -28,9 +29,13 @@ const SpeakerAt = () => {
   }, []);
 
   useEffect(() => {
-    const track = trackRef.current;
-    setWidth(track.scrollWidth / 2);
-  }, []);
+    if (trackRef.current && sliderRef.current) {
+      const track = trackRef.current;
+      const slider = sliderRef.current;
+      setWidth(track.scrollWidth / 2);
+      setDragConstraint(-(track.scrollWidth - slider.offsetWidth));
+    }
+  }, [speakerData]);
 
   useEffect(() => {
     controls.start({
@@ -78,7 +83,7 @@ const SpeakerAt = () => {
             className="flex gap-8 w-max will-change-transform"
             animate={controls}
             drag="x"
-            dragConstraints={{ left: -width, right: 0 }}
+            dragConstraints={{ left: Math.min(dragConstraint, 0), right: 0 }}
             dragElastic={0.05}
             style={{ backfaceVisibility: "hidden" }}
           >

@@ -96,6 +96,8 @@ const ExperienceSlider = () => {
         >
           <motion.div
             drag="x"
+            dragConstraints={sliderRef}
+            dragElastic={0.1}
             className="flex gap-4 sm:gap-6 lg:gap-10 w-max"
           >
             {experiences.map((item, i) => (

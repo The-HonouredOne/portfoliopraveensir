@@ -5,7 +5,9 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 const FeaturedIn = () => {
   const controls = useAnimation();
   const sliderRef = useRef(null);
+  const trackRef = useRef(null);
   const speed = 20;
+  const [dragConstraint, setDragConstraint] = useState(0);
   const [featuredData, setFeaturedData] = useState([]);
 
   const API_URL = "https://portfoliopra-server.onrender.com";
@@ -28,6 +30,12 @@ const FeaturedIn = () => {
 
 
   useEffect(() => {
+    if (trackRef.current && sliderRef.current) {
+      const track = trackRef.current;
+      const slider = sliderRef.current;
+      setDragConstraint(-(track.scrollWidth - slider.offsetWidth));
+    }
+    
     controls.start({
       x: "-50%",
       transition: {
@@ -36,7 +44,7 @@ const FeaturedIn = () => {
         ease: "linear",
       },
     });
-  }, [controls]);
+  }, [controls, featuredData]);
 
   return (
     <section className="py-28 bg-white overflow-hidden">
@@ -68,8 +76,10 @@ const FeaturedIn = () => {
         >
           {/* TRACK */}
           <motion.div
+            ref={trackRef}
             drag="x"
-            dragConstraints={{ left: -2000, right: 0 }}
+            dragConstraints={{ left: Math.min(dragConstraint, 0), right: 0 }}
+            dragElastic={0.05}
             animate={controls}
             className="flex gap-8 w-max"
           >

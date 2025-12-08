@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const testimonials = [
-  {
-    name: "Rakshit Satija",
-    role: "AI Product Manager, Spyne",
-    text: "It was a great time to record a podcast with Praveen for his YT channel and I must commend him and his team for their outstanding efforts. The Sukoon Show stands out for its insightful discussions and good-quality production. I wish Praveen and his team all the very best in their future endeavors and continued success with the podcast.",
-  },
-  {
-    name: "Manish Balani",
-    role: "LinkedIn Top Voice: Fintech",
-    text: "Great work done by Praveen while Coordinating for and Hosting the Podcast: The Sukoon Show. I wish him and his team all the best for the success of their podcast.",
-  },
-  {
-    name: "Ramakant Soni",
-    role: "A passionate Teacher and lifelong teacher, Birla Institute of Technology and Science, Pilani",
-    text: "Praveen Saini demonstrates remarkable leadership qualities coupled with strong competencies in management, public speaking, and entrepreneurship. Throughout his college tenure, he adeptly orchestrated several impactful entrepreneurship initiatives. Praveen's talent for motivating audiences through compelling speeches, combined with his commitment to cultivating entrepreneurial environments, renders him an invaluable addition to any team or institution. I wholeheartedly endorse him.",
-  },
-];
-
 const Testimonial = () => {
   const [index, setIndex] = useState(0);
+  const [testimonials, setTestimonials] = useState([]);
+
+  const API_URL = "http://localhost:8080";
+
+  // Fetch testimonials from API
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const res = await fetch(`${API_URL}/api/reviews`);
+        const data = await res.json();
+        if (data.success) {
+          setTestimonials(data.reviews);
+        }
+      } catch (err) {
+        console.error("Failed to fetch testimonials:", err);
+      }
+    };
+    fetchTestimonials();
+  }, []);
 
   // ✅ Auto slide
   useEffect(() => {
@@ -71,16 +72,32 @@ const Testimonial = () => {
             >
               <div className="text-6xl text-purple-200 mb-6">“</div>
 
+              <div className="flex justify-center mb-4">
+                <span className="text-yellow-500 text-2xl">
+                  {"⭐".repeat(testimonials[index]?.rating || 5)}
+                </span>
+              </div>
+
               <p className="text-gray-700 text-lg leading-relaxed mb-8">
-                {testimonials[index].text}
+                {testimonials[index]?.review}
               </p>
 
               <div className="flex flex-col items-center gap-1">
+                {testimonials[index]?.avatar && (
+                  <img 
+                    src={testimonials[index].avatar} 
+                    alt={testimonials[index].name}
+                    className="w-16 h-16 rounded-full object-cover mb-2"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                    }}
+                  />
+                )}
                 <h4 className="font-bold text-lg">
-                  {testimonials[index].name}
+                  {testimonials[index]?.name}
                 </h4>
                 <p className="text-sm text-purple-600">
-                  {testimonials[index].role}
+                  {testimonials[index]?.position} at {testimonials[index]?.company}
                 </p>
               </div>
             </motion.div>

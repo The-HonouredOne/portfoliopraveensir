@@ -87,7 +87,7 @@ export default function AdminSpeaker({ adminKey }) {
 
       {showForm && (
         <form onSubmit={handleSubmit} className="bg-gray-50 p-4 rounded-lg mb-6">
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <input
               type="text"
               placeholder="Event/Organization Name"
