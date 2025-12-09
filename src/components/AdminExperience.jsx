@@ -12,7 +12,7 @@ export default function AdminExperience({ adminKey }) {
     technologies: ""
   });
 
-  const API_URL = "https://portfoliopra-server.onrender.com";
+  const API_URL = "http://localhost:8080";
 
   useEffect(() => {
     fetchExperiences();

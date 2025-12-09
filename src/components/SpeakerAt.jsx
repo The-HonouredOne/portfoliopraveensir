@@ -10,7 +10,7 @@ const SpeakerAt = () => {
   const [dragConstraint, setDragConstraint] = useState(0);
   const [speakerData, setSpeakerData] = useState([]);
 
-  const API_URL = "https://portfoliopra-server.onrender.com";
+  const API_URL = "http://localhost:8080";
 
   // Fetch speaker data from API
   useEffect(() => {
@@ -101,12 +101,12 @@ const SpeakerAt = () => {
               
                 <div className="h-52 relative overflow-hidden">
                   <img
-                    src={item.logo}
+                    src={item.speakerImage}
                     alt={item.name}
                     loading="lazy"
-                    className="w-full h-full object-contain bg-white p-4 group-hover:scale-110 duration-700"
+                    className="w-full h-full object-cover group-hover:scale-110 duration-700"
                     onError={(e) => {
-                      e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23f3f4f6'/%3E%3Ctext x='100' y='100' text-anchor='middle' dy='.3em' fill='%236b7280'%3ENo Logo%3C/text%3E%3C/svg%3E";
+                      e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23f3f4f6'/%3E%3Ctext x='100' y='100' text-anchor='middle' dy='.3em' fill='%236b7280'%3ENo Image%3C/text%3E%3C/svg%3E";
                     }}
                   />
                 </div>
@@ -121,7 +121,11 @@ const SpeakerAt = () => {
                     {item.name}
                   </h3>
 
-                  <p className="text-sm text-gray-600 mb-5">
+                  <p className="text-sm text-gray-600 mb-2">
+                    <span className="font-semibold">Topic:</span> {item.topic}
+                  </p>
+
+                  <p className="text-xs text-gray-500 mb-5">
                     Speaker Event/Organization
                   </p>
 

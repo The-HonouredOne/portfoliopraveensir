@@ -9,8 +9,10 @@ export default function AdminFeatured({ adminKey }) {
     logo: "",
     url: ""
   });
+  const [logoFile, setLogoFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
-  const API_URL = "https://portfoliopra-server.onrender.com";
+  const API_URL = "http://localhost:8080";
 
   useEffect(() => {
     fetchFeatured();
@@ -25,6 +27,35 @@ export default function AdminFeatured({ adminKey }) {
       }
     } catch (err) {
       console.error("Failed to fetch featured:", err);
+    }
+  };
+
+  const handleLogoUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setLogoFile(file);
+    setUploading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const res = await fetch(`${API_URL}/api/upload?section=featured`, {
+        method: "POST",
+        headers: { "x-admin-key": adminKey },
+        body: formData
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setFormData(prev => ({ ...prev, logo: data.imageUrl }));
+      }
+    } catch (err) {
+      console.error("Failed to upload logo:", err);
+      alert("Failed to upload logo");
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -46,6 +77,7 @@ export default function AdminFeatured({ adminKey }) {
       if (data.success) {
         setFeatured([data.featured, ...featured]);
         setFormData({ name: "", logo: "", url: "" });
+        setLogoFile(null);
         setShowForm(false);
       }
     } catch (err) {
@@ -104,14 +136,22 @@ export default function AdminFeatured({ adminKey }) {
               className="border p-2 rounded"
             />
           </div>
-          <input
-            type="url"
-            placeholder="Logo URL"
-            value={formData.logo}
-            onChange={(e) => setFormData({...formData, logo: e.target.value})}
-            className="w-full border p-2 rounded mb-4"
-            required
-          />
+          <div className="mb-4">
+            <label className="block text-sm font-medium mb-2">Upload Logo</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleLogoUpload}
+              className="w-full border p-2 rounded"
+              required={!formData.logo}
+            />
+            {uploading && <p className="text-sm text-blue-600 mt-1">Uploading...</p>}
+            {formData.logo && (
+              <div className="mt-2">
+                <img src={formData.logo} alt="Preview" className="h-20 object-contain bg-gray-100 rounded p-2" />
+              </div>
+            )}
+          </div>
           <button
             type="submit"
             disabled={loading}
