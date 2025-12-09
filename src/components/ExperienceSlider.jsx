@@ -72,7 +72,7 @@ const ExperienceSlider = () => {
   
 
   return (
-    <section className="py-16 sm:py-24 lg:py-32 bg-gradient-to-b from-white to-gray-50 px-4 overflow-hidden">
+    <section className="py-16 sm:py-24 lg:py-20 bg-gradient-to-b from-white to-gray-50 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
