@@ -9,7 +9,7 @@ const ExperienceSlider = () => {
   const [cardWidth, setCardWidth] = useState(0);
   const [index, setIndex] = useState(0);
 
-  const API_URL = "http://localhost:8080";
+  const API_URL = "https://portfoliopra-server.onrender.com";
 
   // Fetch experiences from API
   useEffect(() => {
