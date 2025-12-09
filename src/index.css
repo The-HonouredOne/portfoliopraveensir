@@ -1,9 +1,7 @@
 @import "tailwindcss";
 
-*{
-      /* font-family: "Metal Mania", system-ui; */
-      
-      
-      
-font-family: "Metal Mania", system-ui;
+* {
+  /* font-family: "Metal Mania", system-ui; */
+font-family: "Montserrat", sans-serif;
+  /* font-family: "Metal Mania", system-ui; */
 }

@@ -6,11 +6,10 @@ export default function AdminSpeaker({ adminKey }) {
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
-    speakerImage: "",
+    speakerImages: [],
     topic: "",
     url: ""
   });
-  const [speakerImageFile, setSpeakerImageFile] = useState(null);
   const [uploading, setUploading] = useState(false);
 
   const API_URL = "https://portfoliopra-server.onrender.com";
@@ -32,36 +31,56 @@ export default function AdminSpeaker({ adminKey }) {
   };
 
   const handleSpeakerImageUpload = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+    const files = Array.from(e.target.files);
+    if (files.length === 0) return;
 
-    setSpeakerImageFile(file);
     setUploading(true);
 
     try {
-      const formData = new FormData();
-      formData.append("image", file);
+      const uploadPromises = files.map(async (file) => {
+        const formData = new FormData();
+        formData.append("image", file);
 
-      const res = await fetch(`${API_URL}/api/upload?section=speaker`, {
-        method: "POST",
-        headers: { "x-admin-key": adminKey },
-        body: formData
+        const res = await fetch(`${API_URL}/api/upload?section=speaker`, {
+          method: "POST",
+          headers: { "x-admin-key": adminKey },
+          body: formData
+        });
+
+        const data = await res.json();
+        return data.success ? data.imageUrl : null;
       });
 
-      const data = await res.json();
-      if (data.success) {
-        setFormData(prev => ({ ...prev, speakerImage: data.imageUrl }));
-      }
+      const uploadedUrls = await Promise.all(uploadPromises);
+      const validUrls = uploadedUrls.filter(url => url !== null);
+
+      setFormData(prev => ({ 
+        ...prev, 
+        speakerImages: [...prev.speakerImages, ...validUrls] 
+      }));
     } catch (err) {
-      console.error("Failed to upload speaker image:", err);
-      alert("Failed to upload speaker image");
+      console.error("Failed to upload speaker images:", err);
+      alert("Failed to upload speaker images");
     } finally {
       setUploading(false);
     }
   };
 
+  const removeImage = (index) => {
+    setFormData(prev => ({
+      ...prev,
+      speakerImages: prev.speakerImages.filter((_, i) => i !== index)
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (formData.speakerImages.length === 0) {
+      alert("Please upload at least one speaker image");
+      return;
+    }
+    
     setLoading(true);
 
     try {
@@ -77,12 +96,14 @@ export default function AdminSpeaker({ adminKey }) {
       const data = await res.json();
       if (data.success) {
         setSpeaker([data.speaker, ...speaker]);
-        setFormData({ name: "", speakerImage: "", topic: "", url: "" });
-        setSpeakerImageFile(null);
+        setFormData({ name: "", speakerImages: [], topic: "", url: "" });
         setShowForm(false);
+      } else {
+        alert(data.message || "Failed to add speaker");
       }
     } catch (err) {
       console.error("Failed to add speaker:", err);
+      alert("Failed to add speaker");
     } finally {
       setLoading(false);
     }
@@ -146,18 +167,29 @@ export default function AdminSpeaker({ adminKey }) {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2">Upload Speaker Image</label>
+            <label className="block text-sm font-medium mb-2">Upload Speaker Images (Multiple)</label>
             <input
               type="file"
               accept="image/*"
+              multiple
               onChange={handleSpeakerImageUpload}
               className="w-full border p-2 rounded"
-              required={!formData.speakerImage}
             />
             {uploading && <p className="text-sm text-blue-600 mt-1">Uploading...</p>}
-            {formData.speakerImage && (
-              <div className="mt-2">
-                <img src={formData.speakerImage} alt="Speaker Preview" className="h-32 object-cover bg-gray-100 rounded" />
+            {formData.speakerImages.length > 0 && (
+              <div className="mt-2 grid grid-cols-3 gap-2">
+                {formData.speakerImages.map((img, idx) => (
+                  <div key={idx} className="relative">
+                    <img src={img} alt={`Preview ${idx + 1}`} className="h-24 w-full object-cover bg-gray-100 rounded" />
+                    <button
+                      type="button"
+                      onClick={() => removeImage(idx)}
+                      className="absolute top-1 right-1 bg-red-600 text-white rounded-full w-6 h-6 text-xs"
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))}
               </div>
             )}
           </div>
@@ -185,13 +217,16 @@ export default function AdminSpeaker({ adminKey }) {
             </div>
             <div className="mb-3">
               <img 
-                src={item.speakerImage} 
+                src={item.speakerImages?.[0]} 
                 alt={item.name}
                 className="w-full h-32 object-cover bg-gray-50 rounded"
                 onError={(e) => {
                   e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%236b7280'%3ENo Image%3C/text%3E%3C/svg%3E";
                 }}
               />
+              {item.speakerImages?.length > 1 && (
+                <p className="text-xs text-gray-500 mt-1">+{item.speakerImages.length - 1} more images</p>
+              )}
             </div>
             {item.topic && (
               <p className="text-sm text-gray-700 mb-2">
