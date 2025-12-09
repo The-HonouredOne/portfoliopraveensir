@@ -12,6 +12,7 @@ export default function AdminReviews({ adminKey }) {
     rating: 5,
     avatar: ""
   });
+  const [uploading, setUploading] = useState(false);
 
   const API_URL = "https://portfoliopra-server.onrender.com";
 
@@ -28,6 +29,34 @@ export default function AdminReviews({ adminKey }) {
       }
     } catch (err) {
       console.error("Failed to fetch reviews:", err);
+    }
+  };
+
+  const handleAvatarUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const res = await fetch(`${API_URL}/api/upload?section=reviews`, {
+        method: "POST",
+        headers: { "x-admin-key": adminKey },
+        body: formData
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setFormData(prev => ({ ...prev, avatar: data.imageUrl }));
+      }
+    } catch (err) {
+      console.error("Failed to upload avatar:", err);
+      alert("Failed to upload avatar");
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -134,13 +163,21 @@ export default function AdminReviews({ adminKey }) {
               <option value={1}>1 Star</option>
             </select>
           </div>
-          <input
-            type="url"
-            placeholder="Avatar URL (optional)"
-            value={formData.avatar}
-            onChange={(e) => setFormData({...formData, avatar: e.target.value})}
-            className="w-full border p-2 rounded mb-4"
-          />
+          <div className="mb-4">
+            <label className="block text-sm font-medium mb-2">Upload Avatar (Optional)</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleAvatarUpload}
+              className="w-full border p-2 rounded"
+            />
+            {uploading && <p className="text-sm text-blue-600 mt-1">Uploading...</p>}
+            {formData.avatar && (
+              <div className="mt-2">
+                <img src={formData.avatar} alt="Avatar Preview" className="h-16 w-16 rounded-full object-cover" />
+              </div>
+            )}
+          </div>
           <textarea
             placeholder="Review text"
             value={formData.review}
