@@ -69,7 +69,7 @@ const ContactAndFooter = () => {
                 </span>
                 <div>
                   <p className="font-medium">Address:</p>
-                  <p className="text-gray-500">Bhamasha Techno Hub</p>
+                  <p className="text-gray-500">Bhamashah Techno Hub , Sansthan Path, Jhalana Gram, Malviya Nagar, Jaipur, Rajasthan 302017</p>
                 </div>
               </div>
 
