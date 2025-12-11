@@ -69,7 +69,7 @@ const ContactAndFooter = () => {
                 </span>
                 <div>
                   <p className="font-medium">Address:</p>
-                  <p className="text-gray-500">New Mexico 31134</p>
+                  <p className="text-gray-500">Bhamasha Techno Hub</p>
                 </div>
               </div>
 
@@ -79,7 +79,7 @@ const ContactAndFooter = () => {
                 </span>
                 <div>
                   <p className="font-medium">My Email:</p>
-                  <p className="text-gray-500">mymail@mail.com</p>
+                  <p className="text-gray-500">praveen@wiz4ugroup.in</p>
                 </div>
               </div>
 
