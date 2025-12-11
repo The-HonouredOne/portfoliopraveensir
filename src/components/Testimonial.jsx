@@ -5,7 +5,7 @@ const Testimonial = () => {
   const [index, setIndex] = useState(0);
   const [testimonials, setTestimonials] = useState([]);
 
-  const API_URL = "https://portfoliopra-server.onrender.com";
+  const API_URL = "http://localhost:8080";
 
   // Fetch testimonials from API
   useEffect(() => {

@@ -12,7 +12,7 @@ export default function AdminFeatured({ adminKey }) {
   const [logoFile, setLogoFile] = useState(null);
   const [uploading, setUploading] = useState(false);
 
-  const API_URL = "https://portfoliopra-server.onrender.com";
+  const API_URL = "http://localhost:8080";
 
   useEffect(() => {
     fetchFeatured();

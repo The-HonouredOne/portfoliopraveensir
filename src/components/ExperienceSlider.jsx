@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 
 const ExperienceSlider = () => {
@@ -9,7 +9,7 @@ const ExperienceSlider = () => {
   const [cardWidth, setCardWidth] = useState(0);
   const [index, setIndex] = useState(0);
 
-  const API_URL = "https://portfoliopra-server.onrender.com";
+  const API_URL = "http://localhost:8080";
 
   // Fetch experiences from API
   useEffect(() => {
@@ -63,12 +63,21 @@ const ExperienceSlider = () => {
   }, [index, cardWidth]);
 
   // ✅ Mouse wheel → horizontal scroll
-  const handleWheel = (e) => {
+  const handleWheel = useCallback((e) => {
     if (sliderRef.current) {
       e.preventDefault();
       sliderRef.current.scrollLeft += e.deltaY;
     }
-  };
+  }, []);
+
+  // Add wheel event listener with passive: false
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (slider) {
+      slider.addEventListener('wheel', handleWheel, { passive: false });
+      return () => slider.removeEventListener('wheel', handleWheel);
+    }
+  }, [handleWheel]);
   
 
   return (
@@ -91,7 +100,6 @@ const ExperienceSlider = () => {
         {/* Slider */}
         <motion.div
           ref={sliderRef}
-          onWheel={handleWheel}
           className="cursor-grab active:cursor-grabbing overflow-x-auto scroll-smooth hide-scrollbar"
         >
           <motion.div

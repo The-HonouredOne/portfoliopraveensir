@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const API_BASE = "https://portfoliopra-server.onrender.com";
+const API_BASE = "http://localhost:8080";
 
 export default function ImageGallery() {
   const [images, setImages] = useState([]);
