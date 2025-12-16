@@ -52,7 +52,7 @@ const Testimonial = () => {
             What People Say
           </h2>
           <p className="text-sm sm:text-base text-gray-500 mt-3 sm:mt-4 max-w-xl mx-auto">
-            Real stories from real people who trusted our work.
+            Real stories from real people who trusted my work.
           </p>
         </motion.div>
 

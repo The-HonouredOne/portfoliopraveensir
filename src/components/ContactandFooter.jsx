@@ -58,8 +58,8 @@ const ContactAndFooter = () => {
           <div>
             <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Let's Discuss your Project</h2>
             <p className="text-sm sm:text-base text-gray-500 mb-6 sm:mb-8">
-              There are many variations of passages of Lorem Ipsum available,
-              but the majority have suffered alteration.
+       Every great idea starts with a conversation.
+Let’s start ours.
             </p>
 
             <div className="space-y-4 sm:space-y-5 text-sm">
