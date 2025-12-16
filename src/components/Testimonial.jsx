@@ -5,7 +5,7 @@ const Testimonial = () => {
   const [index, setIndex] = useState(0);
   const [testimonials, setTestimonials] = useState([]);
 
-  const API_URL = "https://portfoliopra-server.onrender.com";
+  const API_URL = import.meta.env.VITE_API_URL;
 
   // Fetch testimonials from API
   useEffect(() => {

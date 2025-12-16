@@ -10,7 +10,7 @@ const SpeakerAt = () => {
   const [dragConstraint, setDragConstraint] = useState(0);
   const [speakerData, setSpeakerData] = useState([]);
 
-  const API_URL = "https://portfoliopra-server.onrender.com";
+  const API_URL = import.meta.env.VITE_API_URL;
 
   // Fetch speaker data from API
   useEffect(() => {

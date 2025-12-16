@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const API_BASE = "https://portfoliopra-server.onrender.com";
+const API_BASE = import.meta.env.VITE_API_URL;
 
 export default function ImageGallery() {
   const [images, setImages] = useState([]);

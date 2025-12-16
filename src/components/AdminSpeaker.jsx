@@ -12,7 +12,7 @@ export default function AdminSpeaker({ adminKey }) {
   });
   const [uploading, setUploading] = useState(false);
 
-  const API_URL = "https://portfoliopra-server.onrender.com";
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetchSpeaker();

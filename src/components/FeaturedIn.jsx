@@ -10,7 +10,7 @@ const FeaturedIn = () => {
   const [dragConstraint, setDragConstraint] = useState(0);
   const [featuredData, setFeaturedData] = useState([]);
 
-  const API_URL = "https://portfoliopra-server.onrender.com";
+  const API_URL = import.meta.env.VITE_API_URL;
 
   // Fetch featured data from API
   useEffect(() => {
