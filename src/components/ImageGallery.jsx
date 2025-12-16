@@ -23,10 +23,10 @@ export default function ImageGallery() {
         {/* ================= HEADING ================= */}
         <div className="text-center mb-14">
           <h2 className="text-5xl font-extrabold text-gray-800 tracking-tight">
-            Our Gallery
+            My Gallery
           </h2>
           <p className="text-gray-500 mt-3 max-w-xl mx-auto">
-            A glimpse of our latest work & creative moments
+            A glimpse of my latest work & creative moments
           </p>
         </div>
 
